@@ -1,38 +1,48 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CommentDetail from "./CommentDetail";
-import ApprovalCard from "./ApprovalCard";
-import faker from "faker";
+import SeasonDisplay from "./SeasonDisplay";
+import Spinner from "./Spinner";
 
-const App = () => {
-  return (
-    <div className="ui container comments">
-      <ApprovalCard>
-        <CommentDetail
-          author="Jane"
-          timeAt="today at 6 pm"
-          text="Nice Blog Post"
-          avatar={faker.image.avatar()}
-        />
-      </ApprovalCard>
-      <ApprovalCard>
-        <CommentDetail
-          author="Sam"
-          timeAt="today at 1.29 pm"
-          text="Nice writing"
-          avatar={faker.image.avatar()}
-        />
-      </ApprovalCard>
-      <ApprovalCard>
-        <CommentDetail
-          author="Max"
-          timeAt="yesterday at 3.30 pm"
-          text="Nice thoughts"
-          avatar={faker.image.avatar()}
-        />
-      </ApprovalCard>
-    </div>
-  );
-};
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    // only time we alter state without setState
+    this.state = { lat: null, errorMessage: "" };
+  }
+  // or instead of constructor function i can simply dothe following
+  // babel automatically adds it to the predefined constructor function
+  // state={ lat: null, errorMessage: "" };
+
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => this.setState({ lat: position.coords.latitude }),
+      (err) => this.setState({ errorMessage: err.message })
+    );
+  }
+  // helper function for wrapping into a parent render
+  renderContent() {
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div> Error: {this.state.errorMessage}</div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return <SeasonDisplay lat={this.state.lat} />;
+    }
+
+    return <Spinner message="Please accept location request" />;
+  }
+
+  // Required to define render
+  render() {
+    return <div className="border red">{this.renderContent()}</div>;
+  }
+}
 
 ReactDOM.render(<App />, document.querySelector("#root"));
+/* 
+COMMON LIFECYCLE METHODS
+
+componentDidMount
+componentDidUpdate
+componentWillUnmount
+*/
