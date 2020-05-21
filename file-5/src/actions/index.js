@@ -1,4 +1,5 @@
 import jsonPlaceholder from "../apis/jsonPlaceholder";
+import _ from "lodash";
 
 // Action creator
 export const fetchPosts = () => async (dispatch /*, getState */) => {
