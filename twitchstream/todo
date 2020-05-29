@@ -1,0 +1,19 @@
+authorization:
+    17.3
+    ✔ create auth credentials @done(20-05-29 15:11)
+    ✔ create Oauth client id @done(20-05-29 15:11)
+    17.10
+    _2 ways to implement redux into our app_    
+local database:
+    ✔ set up json-server to set up stream server/api @done(20-05-29 15:40)
+    ✔ lodash @done(20-05-29 15:40)
+    22.5
+rtmp server for streaming:
+    ✔ setting up rtmp server @done(20-05-29 15:44)
+    3 terminal windows 
+      1) client side
+      2) api/server
+      3) rtmp server
+    ✔ set up Open Broadcast Software (OBS) @done(20-05-29 15:40)
+    ✔ install obs for windows @done(20-05-29 15:40)
+    ✔ in flv.js setup refactor 'url' @done(20-05-29 15:44)
